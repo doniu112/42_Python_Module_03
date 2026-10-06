@@ -59,7 +59,8 @@ def add_item(inventory: dict[str, int], item: str, quantity: int) -> None:
         if item in inventory:
             raise ItemError(f"Redundant item '{item}' - discarding")
         if quantity < 0:
-            raise ItemError(f"Quantity error for '{item}': value must be non-negative - discarding")
+            raise ItemError(f"Quantity error for '{item}': "
+                             "value must be non-negative - discarding")
         inventory.update({item: quantity})
     except ItemError as e:
         print(e)
@@ -67,11 +68,15 @@ def add_item(inventory: dict[str, int], item: str, quantity: int) -> None:
 
 def item_representation_in_inventory(inventory: dict[str, int]) -> None:
     total_quantity = sum(inventory.values())
-    if total_quantity > 0:
-        for item in inventory:
-            quantity = inventory[item]
-            percentage = round(quantity / total_quantity * 100, 1)
-            print(f"Item {item} represents {percentage}%")
+
+    if total_quantity == 0:
+        print("Total quantity is zero. Cannot calculate percentages.")
+        return
+
+    for item in inventory:
+        quantity = inventory[item]
+        percentage = round(quantity / total_quantity * 100, 1)
+        print(f"Item {item} represents {percentage}%")
 
 
 def most_and_least_abundant_items(inventory: dict[str, int]) -> None:
@@ -107,7 +112,8 @@ def main() -> None:
 
     print(f"Item list: {list(inventory.keys())}")
 
-    print(f"Total quantity of the {len(inventory)} items: {sum(inventory.values())}")
+    print(f"Total quantity of the {len(inventory)} items: "
+          f"{sum(inventory.values())}")
 
     item_representation_in_inventory(inventory=inventory)
 

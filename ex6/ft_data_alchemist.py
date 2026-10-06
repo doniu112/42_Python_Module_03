@@ -21,7 +21,9 @@ def main() -> None:
     print(f"Initial list of players:{players}")
     print(f"New list with all names capitalized: {new_players}\n")
 
-    capitalized_only_players = [player for player in players if player[0].isupper()]
+    capitalized_only_players = [
+        player for player in players if player[0].isupper()
+    ]
 
     print(f"New list of capitalized names only: {capitalized_only_players}\n")
 
@@ -32,7 +34,10 @@ def main() -> None:
     average_score = round(total_score / len(scores), 2)
     print(f"Score average is: {average_score}\n")
 
-    above_average_players = {player: score for player, score in scores.items() if score > average_score}
+    above_average_players = {
+        player: score for player, score in scores.items()
+        if score > average_score
+    }
     print(f"Players with above average score: {above_average_players}")
 
 
