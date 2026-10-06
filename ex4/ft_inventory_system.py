@@ -14,6 +14,11 @@ def create_inventory_system(
         try:
             key, value = argument.split(":")
 
+            if len(key) == 0:
+                raise ItemError(
+                    f"Error - invalid parameter '{argument}'"
+                )
+
             if key in inventory:
                 raise ItemError(
                     f"Redundant item '{key}' - discarding"
@@ -93,8 +98,8 @@ def most_and_least_abundant_items(inventory: dict[str, int]) -> None:
 
 def main() -> None:
     print("=== Inventory System Analysis ===")
-    
-    inventory = {}
+
+    inventory: dict[str, int] = {}
 
     create_inventory_system(inventory=inventory)
 
@@ -106,7 +111,8 @@ def main() -> None:
 
     item_representation_in_inventory(inventory=inventory)
 
-    most_and_least_abundant_items(inventory=inventory)
+    if len(inventory) > 0:
+        most_and_least_abundant_items(inventory)
 
     add_item(inventory=inventory, item="magic_item", quantity=1)
 
