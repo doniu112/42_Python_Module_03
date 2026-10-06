@@ -60,7 +60,7 @@ def add_item(inventory: dict[str, int], item: str, quantity: int) -> None:
             raise ItemError(f"Redundant item '{item}' - discarding")
         if quantity < 0:
             raise ItemError(f"Quantity error for '{item}': "
-                             "value must be non-negative - discarding")
+                            f"value must be non-negative - discarding")
         inventory.update({item: quantity})
     except ItemError as e:
         print(e)

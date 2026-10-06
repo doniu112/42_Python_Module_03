@@ -13,7 +13,7 @@ def distance(
     return dist
 
 
-def get_player_pos() -> tuple[float, float, float]:
+def get_player_pos() -> tuple[float, float, float] | None:
     while True:
         try:
             user_input = input(
@@ -22,7 +22,7 @@ def get_player_pos() -> tuple[float, float, float]:
         except EOFError:
             print("\nInput ended.")
             return None
-        
+
         list_of_coordinates = user_input.split(",")
 
         if len(list_of_coordinates) != 3:
@@ -38,15 +38,14 @@ def get_player_pos() -> tuple[float, float, float]:
         except ValueError:
             print(
                 f"Error on parameter '{pos}': "
-                f"could not convert string to float: '{pos}'"
-            )
+                f"could not convert string to float: '{pos}'")
             continue
 
         return (
             converted_coordinates[0],
             converted_coordinates[1],
-            converted_coordinates[2],
-        )
+            converted_coordinates[2]
+            )
 
 
 def main() -> None:
