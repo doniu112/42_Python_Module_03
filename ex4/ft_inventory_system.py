@@ -90,6 +90,7 @@ def most_and_least_abundant_items(inventory: dict[str, int]) -> None:
     print(f"Item most abundant: {most_item} with quantity {most_quantity}")
     print(f"Item least abundant: {least_item} with quantity {least_quantity}")
 
+
 def main() -> None:
     print("=== Inventory System Analysis ===")
     
