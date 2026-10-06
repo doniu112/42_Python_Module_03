@@ -15,9 +15,14 @@ def distance(
 
 def get_player_pos() -> tuple[float, float, float]:
     while True:
-        user_input = input(
-            "Enter new coordinates as floats in format 'x,y,z': "
-        )
+        try:
+            user_input = input(
+                "Enter new coordinates as floats in format 'x,y,z': "
+            )
+        except EOFError:
+            print("\nInput ended.")
+            return None
+        
         list_of_coordinates = user_input.split(",")
 
         if len(list_of_coordinates) != 3:
@@ -51,6 +56,8 @@ def main() -> None:
 
     print("Get a first set of coordinates")
     first_coordinates = get_player_pos()
+    if first_coordinates is None:
+        return
 
     print(f"Got a first tuple: {first_coordinates}")
     print(
@@ -65,6 +72,8 @@ def main() -> None:
 
     print("\nGet a second set of coordinates")
     second_coordinates = get_player_pos()
+    if second_coordinates is None:
+        return
 
     print(f"Got a second tuple: {second_coordinates}")
 
