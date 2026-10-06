@@ -60,7 +60,7 @@ def main() -> None:
     )
     print(
         "Distance to center: "
-        f"{distance(coordinates_center, first_coordinates)}"
+        f"{round(distance(coordinates_center, first_coordinates), 4)}"
     )
 
     print("\nGet a second set of coordinates")
@@ -74,7 +74,7 @@ def main() -> None:
     )
     print(
         "Distance between the 2 sets of coordinates: "
-        f"{distance_between}"
+        f"{round(distance_between, 4)}"
     )
 
 

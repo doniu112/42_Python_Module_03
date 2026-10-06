@@ -2,12 +2,11 @@ import random
 
 
 def gen_player_achievements(
-    player_achievements: set[str],
     available_achievements: list[str],
 ) -> set[str]:
     number_of_achievements = random.randint(
-        0,
-        len(available_achievements),
+        5,
+        10,
     )
 
     selected_achievements = random.sample(
@@ -15,9 +14,7 @@ def gen_player_achievements(
         k=number_of_achievements,
     )
 
-    player_achievements.update(selected_achievements)
-
-    return player_achievements
+    return set(selected_achievements)
 
 
 def add_achievements(
@@ -98,47 +95,72 @@ def main() -> None:
         "Boss Slayer",
     ]
 
-    players: dict[str, set[str]] = {
-        "Anna": set(),
-        "Dominik": set(),
-        "Weronika": set(),
-        "Antoni": set(),
-    }
-
     print("=== Achievement Tracker System ===")
 
-    add_achievements(players, achievements)
+    anna = gen_player_achievements(achievements)
+    dominik = gen_player_achievements(achievements)
+    weronika = gen_player_achievements(achievements)
+    antoni = gen_player_achievements(achievements)
 
-    for player_name, player_achievements in players.items():
-        print(
-            f"\nPlayer {player_name}: "
-            f"{player_achievements}"
-        )
+    print(f"\nPlayer Anna: {anna}")
+    print(f"Player Dominik: {dominik}")
+    print(f"Player Weronika: {weronika}")
+    print(f"Player Antoni: {antoni}")
 
-    distinct = distinct_achievements(players)
-    print(f"\nAll distinct achievements: {distinct}")
+    all_distinct = anna.union(
+        dominik,
+        weronika,
+        antoni,
+    )
 
-    common = common_achievements(players)
+    print(f"\nAll distinct achievements: {all_distinct}")
+
+    common = anna.intersection(
+        dominik,
+        weronika,
+        antoni,
+    )
+
     print(f"\nCommon achievements: {common}")
 
+    only_anna = anna.difference(
+        dominik.union(weronika, antoni)
+    )
+    only_dominik = dominik.difference(
+        anna.union(weronika, antoni)
+    )
+    only_weronika = weronika.difference(
+        anna.union(dominik, antoni)
+    )
+    only_antoni = antoni.difference(
+        anna.union(dominik, weronika)
+    )
+
     print()
+    print(f"Only Anna has: {only_anna}")
+    print(f"Only Dominik has: {only_dominik}")
+    print(f"Only Weronika has: {only_weronika}")
+    print(f"Only Antoni has: {only_antoni}")
 
-    for player_name in players:
-        unique = unique_achievements(
-            player_name,
-            players,
-        )
-        print(f"Only {player_name} has: {unique}")
+    all_achievements = set(achievements)
 
     print()
-
-    for player_name in players:
-        missing = missing_achievements(
-            player_name,
-            players,
-            achievements,
-        )
-        print(f"{player_name} is missing: {missing}")
+    print(
+        f"Anna is missing: "
+        f"{all_achievements.difference(anna)}"
+    )
+    print(
+        f"Dominik is missing: "
+        f"{all_achievements.difference(dominik)}"
+    )
+    print(
+        f"Weronika is missing: "
+        f"{all_achievements.difference(weronika)}"
+    )
+    print(
+        f"Antoni is missing: "
+        f"{all_achievements.difference(antoni)}"
+    )
 
 if __name__ == "__main__":
     main()

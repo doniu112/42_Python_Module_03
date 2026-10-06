@@ -2,6 +2,8 @@ import sys
 
 
 def main() -> None:
+    print("=== Player Score Analytics ===")
+
     if len(sys.argv) == 1:
         print("No scores provided. Usage: "
               "python3 ft_score_analytics.py <score1> <score2> ...")
@@ -9,11 +11,10 @@ def main() -> None:
 
     scores: list[int] = []
 
-    print("=== Player Score Analytics ===")
     for argument in sys.argv[1:]:
         try:
             score = int(argument)
-            scores.append(int(score))
+            scores.append(score)
         except ValueError:
             print(f"Invalid parameter: '{argument}'")
 
