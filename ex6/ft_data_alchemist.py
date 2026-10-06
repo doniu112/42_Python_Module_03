@@ -21,11 +21,11 @@ def main() -> None:
     print(f"Initial list of players:{players}")
     print(f"New list with all names capitalized: {new_players}\n")
 
-    capitalized_only_playesrs = [player for player in players if player[0].isupper()]
+    capitalized_only_players = [player for player in new_players if player[0].isupper()]
 
-    print(f"New list of capitalized names only: {capitalized_only_playesrs}\n")
+    print(f"New list of capitalized names only: {capitalized_only_players}\n")
 
-    scores = {player : random.randint(0, 1000) for player in players}
+    scores = {player : random.randint(0, 1000) for player in new_players}
     print(f"Score dict: {scores}\n")
 
     total_score = sum(scores.values())
